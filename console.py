@@ -5,6 +5,11 @@
 import sys
 import cmd
 from models.base_model import BaseModel
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models.user import User
 from models import storage
 
@@ -43,14 +48,19 @@ class HBNBCommand(cmd.Cmd):
         
         """ checks the lines and returns appropriate"""
         args = line.split()
-        models = ('BaseModel', 'User')
+        retVal = ''
+        models = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review']
         if len(args) == 0:
-            print("** class name missing **")
-        elif len(args) > 0:
+            retVal = f"** class name missing **"
+        elif len(args) == 1:
             if args[0] not in models:
-                print("** class doesn't exist **")
+                retVal = f"** class doesn't exist **"
             else:
-                return args[0]
+                retVal = args[0]
+        else:
+            retVal = f"** class doesn't exist **"
+                
+        return retVal
 
     def check_line_id(self, line):
 
@@ -75,6 +85,8 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
 
         """ creates and saves instance of the model """
+
+        
         if self.check_line_model(line) == 'BaseModel':
             new = BaseModel()
             new.save()
@@ -85,6 +97,33 @@ class HBNBCommand(cmd.Cmd):
             new.save()
             print(new.id)
 
+        elif self.check_line_model(line) == 'State':
+            new = State()
+            new.save()
+            print(new.id)
+
+        elif self.check_line_model(line) == 'City':
+            new = City()
+            new.save()
+            print(new.id)
+
+        elif self.check_line_model(line) == 'Amenity':
+            new = Amenity()
+            new.save()
+            print(new.id)
+
+        elif self.check_line_model(line) == 'Place':
+            new1 = Place()
+            new1.save()
+            print(new1.id)
+
+        elif self.check_line_model(line) == 'Review':
+            new = Review()
+            new.save()
+            print(new.id)
+        else:
+            print(self.check_line_model(line))
+    
     def do_show(self, line):
 
         """ prints the string representation of an instance
@@ -92,26 +131,48 @@ class HBNBCommand(cmd.Cmd):
         """
         args = line.split()
         if self.check_line_id(line):
-            id = self.check_line_model(line)
+            id = self.check_line_model(args[0])
             key = f'{id}.{args[1]}'
             if self.check_id(key):
                 if id == 'BaseModel':
-                    base = BaseModel()
                     storage_ins = storage.all()[key]
                     base_model = BaseModel(**storage_ins)
                     print(base_model)
                 elif id == 'User':
-                    base = User()
                     storage_ins = storage.all()[key]
                     user_model = User(**storage_ins)
                     print(user_model)
 
+                elif id == 'State':
+                    storage_ins = storage.all()[key]
+                    user_model = State(**storage_ins)
+                    print(user_model)
+
+                elif id == 'City':
+                    storage_ins = storage.all()[key]
+                    user_model = City(**storage_ins)
+                    print(user_model)
+
+                elif id == 'Amenity':
+                    storage_ins = storage.all()[key]
+                    user_model = Amenity(**storage_ins)
+                    print(user_model)
+
+                elif id == 'Place':
+                    storage_ins = storage.all()[key]
+                    user_model = Place(**storage_ins)
+                    print(user_model)
+
+                elif id == 'Review':
+                    storage_ins = storage.all()[key]
+                    user_model = Review(**storage_ins)
+                    print(user_model)
 
     def do_destroy(self, line):
         
         args = line.split()
         if self.check_line_id(line):
-            key = self.check_line_model(line)
+            key = self.check_line_model(args[0])
             id = f'{key}.{args[1]}'
             if self.check_id(id):
                 del storage.all()[id]
@@ -122,14 +183,38 @@ class HBNBCommand(cmd.Cmd):
             st = storage.all()
             base_id = []
             user_id = []
+            state_id = []
+            city_id = []
+            amenity_id = []
+            place_id = []
+            review_id = []
+
+
             for id in st:
                 if id.split(".")[0] == "User":
                     user_id.append(id)
                 elif id.split(".")[0] == "BaseModel":
                     base_id.append(id)
+                elif id.split(".")[0] == "State":
+                    state_id.append(id)
+                elif id.split(".")[0] == "City":
+                    city_id.append(id)
+                elif id.split(".")[0] == "Amenity":
+                    amenity_id.append(id)
+                elif id.split(".")[0] == "Place":
+                    place_id.append(id)
+                elif id.split(".")[0] == "Review":
+                    review_id.append(id)
+
             b_id = [BaseModel(**st[ids]).__str__() for ids in base_id]
             u_id = [User(**st[ids]).__str__() for ids in user_id]
-            all_model = b_id + u_id
+            s_id = [State(**st[ids]).__str__() for ids in state_id]
+            c_id = [City(**st[ids]).__str__() for ids in city_id]
+            a_id = [Amenity(**st[ids]).__str__() for ids in amenity_id]
+            p_id = [Place(**st[ids]).__str__() for ids in place_id]
+            r_id = [Review(**st[ids]).__str__() for ids in review_id]
+
+            all_model = b_id + u_id + s_id + c_id + a_id + p_id + r_id
             
             if len(line.split()) == 0:
                 print(all_model)
@@ -138,6 +223,16 @@ class HBNBCommand(cmd.Cmd):
                 print(b_id)
             elif line.split()[0] == 'User':
                 print(u_id)
+            elif line.split()[0] == 'State':
+                print(s_id)
+            elif line.split()[0] == 'City':
+                print(c_id)
+            elif line.split()[0] == 'Amenity':
+                print(a_id)
+            elif line.split()[0] == 'Place':
+                print(p_id)
+            elif line.split()[0] == 'Review':
+                print(r_id)
             else:
                 print("** class doesn't exist **")
                         
@@ -146,7 +241,7 @@ class HBNBCommand(cmd.Cmd):
 
         args = line.split()
         if self.check_line_id(line):
-            key = self.check_line_model(line)
+            key = self.check_line_model(args[0])
 
             id = f'{key}.{args[1]}'
             if self.check_id(id):
@@ -168,8 +263,9 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         value = value
 
-                    update[args[2]] = str(value)
-                    storage.save()
+                        update[args[2]] = str(value)
+                        BaseModel(**update)
+                        storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

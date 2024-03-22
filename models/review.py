@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
- """ review mode """
+""" review mode """
 
 from models.base_model import BaseModel
 

@@ -31,18 +31,18 @@ class FileStorage():
             obj_dict['email'] = obj.email
             obj_dict['password'] = obj.password
 
-        elif obj.__class__.name__ == "State":
+        elif obj.__class__.__name__ == "State":
             obj_dict['name'] = obj.name
 
-        elif obj.__class__.name__  == 'City':
+        elif obj.__class__.__name__  == 'City':
 
             obj_dict['state_id'] = obj.id
             obj_dict['name'] = ""
 
-        elif obj.__class__.name__ == 'Amenity':
+        elif obj.__class__.__name__ == 'Amenity':
             obj_dict['name'] = obj.name
 
-        elif obj.__class__.name__  == 'Place':
+        elif obj.__class__.__name__  == 'Place':
             obj_dict['city_id'] = ""
             obj_dict['user_id'] = ""
             obj_dict['name'] = obj.name
@@ -53,7 +53,7 @@ class FileStorage():
             obj_dict['price_by_night'] = obj.price_by_night
             obj_dict['latitude'] = obj.latitude
             obj_dict['longitude'] = obj.longitude
-            obj_dict['amenity_ids'] = obj.amenity
+            obj_dict['amenity_ids'] = obj.amenity_id
 
         elif obj.__class__.__name__ == 'Review':
             obj_dict['place_id'] = ""
