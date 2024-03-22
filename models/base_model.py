@@ -7,18 +7,20 @@ import copy
 from datetime import datetime
 from . import storage
 
+
 class BaseModel():
-    
+
     """ basemodel """
 
     def __init__(self, *args, **kwargs):
 
         """ initialize constructors """
-        
+
         if kwargs:
+            t_format = '%Y-%m-%dT%H:%M:%S.%f'
             self.id = kwargs['id']
-            self.created_at = datetime.strptime(kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
-            self.updated_at = datetime.strptime(kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
+            self.created_at = datetime.strptime(kwargs['created_at'], t_format)
+            self.updated_at = datetime.strptime(kwargs['updated_at'], t_format)
             for key in kwargs:
                 if key != "__class__":
                     setattr(self, key, kwargs[key])
@@ -34,9 +36,8 @@ class BaseModel():
 
         return (f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}')
 
-    
     def save(self):
-        
+
         """ updates the public instance attribute update_at """
 
         self.updated_at = datetime.now()

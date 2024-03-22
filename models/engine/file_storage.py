@@ -34,7 +34,7 @@ class FileStorage():
         elif obj.__class__.__name__ == "State":
             obj_dict['name'] = obj.name
 
-        elif obj.__class__.__name__  == 'City':
+        elif obj.__class__.__name__ == 'City':
 
             obj_dict['state_id'] = obj.id
             obj_dict['name'] = ""
@@ -42,7 +42,7 @@ class FileStorage():
         elif obj.__class__.__name__ == 'Amenity':
             obj_dict['name'] = obj.name
 
-        elif obj.__class__.__name__  == 'Place':
+        elif obj.__class__.__name__ == 'Place':
             obj_dict['city_id'] = ""
             obj_dict['user_id'] = ""
             obj_dict['name'] = obj.name
@@ -65,15 +65,15 @@ class FileStorage():
     def save(self):
 
         """ serialize __objects to json and saves file """
-        
+
         path = FileStorage.__file_path
-        with open(path, mode = 'w', encoding='utf-8') as file:
+        with open(path, mode='w', encoding='utf-8') as file:
             file.write(json.dumps(FileStorage.__objects))
 
     def reload(self):
 
         """ deserializes json file to __objects """
-    
+
         path = FileStorage.__file_path
         try:
             with open(path, 'r', encoding='utf-8') as file:
