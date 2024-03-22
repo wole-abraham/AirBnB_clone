@@ -219,6 +219,9 @@ class HBNBCommand(cmd.Cmd):
             if len(line.split()) == 0:
                 print(all_model)
 
+            elif len(line.split()) > 1:
+                print("** class doesn't exis**")
+
             elif line.split()[0] == 'BaseModel':
                 print(b_id)
             elif line.split()[0] == 'User':
