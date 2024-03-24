@@ -3,7 +3,13 @@
 """ File Storage Module """
 
 import json
-
+"""from models.base_model import BaseModel
+from models.user import user
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
+from models.state import State
+from models.city import City"""
 
 class FileStorage():
 
@@ -62,6 +68,7 @@ class FileStorage():
 
         FileStorage.__objects[obj_key] = obj_dict
 
+
     def save(self):
 
         """ serialize __objects to json and saves file """
@@ -74,11 +81,21 @@ class FileStorage():
 
         """ deserializes json file to __objects """
 
+        """models = {'BaseModel': BaseModel,
+                  'User':User, 'Place':Place,
+                  'State':State, 'Amenity':Amenity,
+                  'City':City, 'Review':Review
+                  }"""
+        
+
         path = FileStorage.__file_path
         try:
             with open(path, 'r', encoding='utf-8') as file:
                 objects = file.read()
                 FileStorage.__objects = json.loads(objects)
+            
+            """for k,v in models.items():
+                print(v)"""
 
         except FileNotFoundError:
             pass

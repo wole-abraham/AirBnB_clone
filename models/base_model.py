@@ -5,7 +5,7 @@
 import uuid
 import copy
 from datetime import datetime
-from . import storage
+from models import storage
 
 
 class BaseModel():
@@ -18,12 +18,12 @@ class BaseModel():
 
         if kwargs:
             t_format = '%Y-%m-%dT%H:%M:%S.%f'
-            self.id = kwargs['id']
-            self.created_at = datetime.strptime(kwargs['created_at'], t_format)
-            self.updated_at = datetime.strptime(kwargs['updated_at'], t_format)
             for key in kwargs:
                 if key != "__class__":
                     setattr(self, key, kwargs[key])
+            self.created_at = datetime.strptime(kwargs['created_at'], t_format)
+            self.updated_at = datetime.strptime(kwargs['updated_at'], t_format)
+
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -41,7 +41,6 @@ class BaseModel():
         """ updates the public instance attribute update_at """
 
         self.updated_at = datetime.now()
-        storage.new(self)
         storage.save()
 
     def to_dict(self):

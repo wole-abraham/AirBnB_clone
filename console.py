@@ -266,9 +266,11 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         value = value
 
-                        update[args[2]] = str(value)
-                        BaseModel(**update)
-                        storage.save()
+                update[args[2]] = str(value)
+                a = BaseModel(**update)
+                print(a)
+                a.save()
+    
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
