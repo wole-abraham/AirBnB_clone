@@ -11,6 +11,7 @@ from models.review import Review
 from models.state import State
 from models.city import City
 
+
 class FileStorage():
 
     """ Deserialization and serialization of json file """
@@ -47,11 +48,11 @@ class FileStorage():
         """ deserializes json file to __objects """
 
         models = {'BaseModel': BaseModel,
-                  'User':User, 'Place':Place,
-                  'State':State, 'Amenity':Amenity,
-                  'City':City, 'Review':Review
+                  'User': User, 'Place': Place,
+                  'State': State, 'Amenity': Amenity,
+                  'City': City, 'Review': Review
                   }
-        
+
         path = FileStorage.__file_path
         try:
             with open(path, 'r', encoding='utf-8') as file:
