@@ -8,11 +8,43 @@ from datetime import datetime
 
 class BaseModel():
 
-    """ basemodel """
+    """
+    BaseModel serves as the base class for all models in the system.
+
+    Attributes:
+        id (str): A unique identifier for the object.
+        created_at (datetime): The datetime when the object was created.
+        updated_at (datetime): The datetime when the object was last updated.
+
+    Methods:
+        __init__(self, *args, **kwargs):
+            Initializes a new instance of the BaseModel class.
+        __str__(self):
+            Returns a string representation of the object.
+        save(self):
+            Updates the `updated_at` attribute and saves the object.
+        to_dict(self):
+            Returns a dictionary representation of the object.
+
+    """
 
     def __init__(self, *args, **kwargs):
 
-        """ initialize constructors """
+        """
+        Initializes a new instance of the BaseModel class.
+
+        Args:
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
+
+        If keyword arguments are provided (`kwargs`),
+        it sets attributes of the object based on those arguments.
+        If no keyword arguments are provided,
+        it generates a new `id` using `uuid.uuid4()`,
+        sets `created_at` and `updated_at` attributes
+        to the current datetime, and adds the new object to storage.
+
+        """
 
         from models import storage
 
@@ -32,13 +64,26 @@ class BaseModel():
 
     def __str__(self):
 
-        """ string representation of basemodel """
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object,
+            including class name, object ID, and attribute dictionary.
+        """
 
         return (f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}')
 
     def save(self):
 
-        """ updates the public instance attribute update_at """
+        """
+        Updates the `updated_at` attribute to the current datetime
+        and saves the object.
+
+        This method is responsible for updating the
+        `updated_at` attribute with the current datetime
+        and saving the object using the storage mechanism.
+        """
 
         from models import storage
 
@@ -47,7 +92,14 @@ class BaseModel():
 
     def to_dict(self):
 
-        """ dictionary represntation """
+        """
+        Returns a dictionary representation of the object.
+
+        Returns:
+            dict: A dictionary representation of the object,
+            including all attributes,
+            class name, and timestamps formatted as ISO 8601 strings.
+        """
 
         instance_dict = self.__dict__.copy()
         instance_dict['__class__'] = self.__class__.__name__
