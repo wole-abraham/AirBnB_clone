@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
         elif len(args) > 1 or args[0] not in models:
-            print("** class name doesn't exist **")
+            print("** class doesn't exist **")
         else:
             new = models[args[0]]()
             new.save()
