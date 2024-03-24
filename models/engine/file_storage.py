@@ -30,51 +30,7 @@ class FileStorage():
 
         key = f'{obj.__class__.__name__}.{obj.id}'
 
-        attr = ['email','password', 'first_name', 'last_name',
-                'name', 'number_rooms', 'number_bathrooms',
-                'max_guest', 'price_by_night', 'latitude',
-                'longitude', 'amenity_id', 'place_id',
-                'user_id', 'text', 'state_id']
-
-        models = ['User', 'State', 'Review', 'Amenity',
-                'City', 'Place', 'BaseModel']
-
-        if obj.__class__.__name__ in models:
-            for attr in attr:
-                if hasattr(obj, attr):
-                    setattr(obj, attr, getattr(obj, attr))
-            FileStorage.__objects[key] = obj
-
-        """elif obj.__class__.__name__ == "State":
-            obj_dict['name'] = obj.name
-
-        elif obj.__class__.__name__ == 'City':
-
-            obj_dict['state_id'] = obj.id
-            obj_dict['name'] = ""
-
-        elif obj.__class__.__name__ == 'Amenity':
-            obj_dict['name'] = obj.name
-
-        elif obj.__class__.__name__ == 'Place':
-            obj_dict['city_id'] = ""
-            obj_dict['user_id'] = ""
-            obj_dict['name'] = obj.name
-            obj_dict['description'] = obj.description
-            obj_dict['number_rooms'] = obj.number_rooms
-            obj_dict['number_bathrooms'] = obj.number_rooms
-            obj_dict['max_guest'] = obj.max_guest
-            obj_dict['price_by_night'] = obj.price_by_night
-            obj_dict['latitude'] = obj.latitude
-            obj_dict['longitude'] = obj.longitude
-            obj_dict['amenity_ids'] = obj.amenity_id
-
-        elif obj.__class__.__name__ == 'Review':
-            obj_dict['place_id'] = ""
-            obj_dict['user_id'] = ""
-            obj_dict['text'] = "" """
-
-
+        FileStorage.__objects[key] = obj
 
     def save(self):
 
@@ -96,7 +52,6 @@ class FileStorage():
                   'City':City, 'Review':Review
                   }
         
-
         path = FileStorage.__file_path
         try:
             with open(path, 'r', encoding='utf-8') as file:
