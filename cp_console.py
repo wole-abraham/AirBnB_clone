@@ -40,6 +40,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
 
+                
         """ does nothing if line empty """
 
         pass
@@ -52,15 +53,16 @@ class HBNBCommand(cmd.Cmd):
         models = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review']
         if len(args) == 0:
             retVal = f"** class name missing **"
+            print(retVal)
+            return False
         elif len(args) == 1:
             if args[0] not in models:
                 retVal = f"** class doesn't exist **"
-            else:
-                retVal = args[0]
+                print(retVal)
+                return False
         else:
-            retVal = f"** class doesn't exist **"
-                
-        return retVal
+            retVal = args[0]
+            return retVal
 
     def check_line_id(self, line):
 
@@ -131,40 +133,42 @@ class HBNBCommand(cmd.Cmd):
         """
         args = line.split()
         if self.check_line_id(line):
-            id = self.check_line_model(args[0])
-            key = f'{id}.{args[1]}'
-            if self.check_id(key):
-                if id == 'BaseModel':
-                    storage_ins = storage.all()[key]
-                    print(storage_ins)
-                elif id == 'User':
-                    storage_ins = storage.all()[key]
-                    print(storage_ins)
+            if self.check_line_id(line):
+                key = f'{id}.{args[1]}'
+                if self.check_id(key):
+                    if id == 'BaseModel':
+                        storage_ins = storage.all()[key]
+                        base_model = BaseModel(**storage_ins)
+                        print(base_model)
+                    elif id == 'User':
+                        storage_ins = storage.all()[key]
+                        user_model = User(**storage_ins)
+                        print(user_model)
 
-                elif id == 'State':
-                    storage_ins = storage.all()[key]
-                    user_model = State(**storage_ins)
-                    print(user_model)
+                    elif id == 'State':
+                        storage_ins = storage.all()[key]
+                        user_model = State(**storage_ins)
+                        print(user_model)
 
-                elif id == 'City':
-                    storage_ins = storage.all()[key]
-                    user_model = City(**storage_ins)
-                    print(user_model)
+                    elif id == 'City':
+                        storage_ins = storage.all()[key]
+                        user_model = City(**storage_ins)
+                        print(user_model)
 
-                elif id == 'Amenity':
-                    storage_ins = storage.all()[key]
-                    user_model = Amenity(**storage_ins)
-                    print(user_model)
+                    elif id == 'Amenity':
+                        storage_ins = storage.all()[key]
+                        user_model = Amenity(**storage_ins)
+                        print(user_model)
 
-                elif id == 'Place':
-                    storage_ins = storage.all()[key]
-                    user_model = Place(**storage_ins)
-                    print(user_model)
+                    elif id == 'Place':
+                        storage_ins = storage.all()[key]
+                        user_model = Place(**storage_ins)
+                        print(user_model)
 
-                elif id == 'Review':
-                    storage_ins = storage.all()[key]
-                    user_model = Review(**storage_ins)
-                    print(user_model)
+                    elif id == 'Review':
+                        storage_ins = storage.all()[key]
+                        user_model = Review(**storage_ins)
+                        print(user_model)
 
     def do_destroy(self, line):
         

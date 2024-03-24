@@ -3,13 +3,13 @@
 """ File Storage Module """
 
 import json
-"""from models.base_model import BaseModel
-from models.user import user
+from models.base_model import BaseModel
+from models.user import User
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 from models.state import State
-from models.city import City"""
+from models.city import City
 
 class FileStorage():
 
@@ -28,16 +28,24 @@ class FileStorage():
 
         """ create new  """
 
-        obj_key = f'{obj.__class__.__name__}.{obj.id}'
-        obj_dict = obj.to_dict()
+        key = f'{obj.__class__.__name__}.{obj.id}'
 
-        if obj.__class__.__name__ == "User":
-            obj_dict['first_name'] = obj.first_name
-            obj_dict['last_name'] = obj.last_name
-            obj_dict['email'] = obj.email
-            obj_dict['password'] = obj.password
+        attr = ['email','password', 'first_name', 'last_name',
+                'name', 'number_rooms', 'number_bathrooms',
+                'max_guest', 'price_by_night', 'latitude',
+                'longitude', 'amenity_id', 'place_id',
+                'user_id', 'text', 'state_id']
 
-        elif obj.__class__.__name__ == "State":
+        models = ['User', 'State', 'Review', 'Amenity',
+                'City', 'Place', 'BaseModel']
+
+        if obj.__class__.__name__ in models:
+            for attr in attr:
+                if hasattr(obj, attr):
+                    setattr(obj, attr, getattr(obj, attr))
+            FileStorage.__objects[key] = obj
+
+        """elif obj.__class__.__name__ == "State":
             obj_dict['name'] = obj.name
 
         elif obj.__class__.__name__ == 'City':
@@ -64,38 +72,39 @@ class FileStorage():
         elif obj.__class__.__name__ == 'Review':
             obj_dict['place_id'] = ""
             obj_dict['user_id'] = ""
-            obj_dict['text'] = ""
+            obj_dict['text'] = "" """
 
-        FileStorage.__objects[obj_key] = obj_dict
 
 
     def save(self):
 
         """ serialize __objects to json and saves file """
-
+        serialized_obj = {}
+        for key, obj in FileStorage.__objects.items():
+            serialized_obj[key] = obj.to_dict()
         path = FileStorage.__file_path
         with open(path, mode='w', encoding='utf-8') as file:
-            file.write(json.dumps(FileStorage.__objects))
+            json.dump(serialized_obj, file)
 
     def reload(self):
 
         """ deserializes json file to __objects """
 
-        """models = {'BaseModel': BaseModel,
+        models = {'BaseModel': BaseModel,
                   'User':User, 'Place':Place,
                   'State':State, 'Amenity':Amenity,
                   'City':City, 'Review':Review
-                  }"""
+                  }
         
 
         path = FileStorage.__file_path
         try:
             with open(path, 'r', encoding='utf-8') as file:
-                objects = file.read()
-                FileStorage.__objects = json.loads(objects)
-            
-            """for k,v in models.items():
-                print(v)"""
+                data = json.load(file)
+                for keys, value in data.items():
+                    model = keys.split('.')[0]
+                    obj = models[model](**value)
+                    FileStorage.__objects[keys] = obj
 
         except FileNotFoundError:
             pass

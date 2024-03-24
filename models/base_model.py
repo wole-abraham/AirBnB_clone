@@ -3,10 +3,7 @@
 """ base model  """
 
 import uuid
-import copy
 from datetime import datetime
-from models import storage
-
 
 class BaseModel():
 
@@ -15,6 +12,8 @@ class BaseModel():
     def __init__(self, *args, **kwargs):
 
         """ initialize constructors """
+
+        from models import storage
 
         if kwargs:
             t_format = '%Y-%m-%dT%H:%M:%S.%f'
@@ -40,7 +39,11 @@ class BaseModel():
 
         """ updates the public instance attribute update_at """
 
+        from models import storage
+
         self.updated_at = datetime.now()
+        storage.new(self)
+        storage.save()
 
     def to_dict(self):
 
