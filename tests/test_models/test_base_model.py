@@ -11,6 +11,18 @@ class TestBaseModel(unittest.TestCase):
 
     """ BaseModel tests """
 
+    def test_attributes(self):
+
+        """
+            check for all attributes
+        """
+
+        self.assertTrue(hasattr(BaseModel, 'id'))
+        self.asserTrue(hasattr(BaseModel, 'created_at'))
+        self.assertTrue(hasattr(BaseModel, 'updated_at'))
+        self.assertTrue(hasattr(BaseModel, 'save'))
+        self.assertTrue(hasattr(BaseModel, 'to_dict'))
+
     def test_id(self):
 
         """ test id is unique for all instance
