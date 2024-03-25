@@ -52,3 +52,14 @@ class TestFileStorage(unittest.TestCase):
         fs.new(bm)
         bm.save()
         self.assertTrue(bm.updated_at == datetime.now())
+
+    def test_file_storage_reload(self):
+
+        """ test reloaded are objetcs """
+
+        fs = FileStorage()
+        bm = BaseModel()
+        fs.new(bm)
+        bm.save()
+        fs.reload()
+        self.assertTrue(isinstance(fs.__objects[f'BaseModel.{bm.id}'], class))
