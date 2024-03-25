@@ -63,3 +63,30 @@ class TestFileStorage(unittest.TestCase):
         bm.save()
         fs.reload()
         self.assertTrue(isinstance(fs.__objects[f'BaseModel.{bm.id}'], class))
+
+class TestFileStorageReload(unittest.TestCase):
+    def setUp(self):
+        # Create a sample JSON file with some data
+        sample_data = {
+            'BaseModel.1': {'attr1': 'value1'},
+            'User.2': {'attr2': 'value2'}
+        }
+        with open('test_file.json', 'w') as f:
+            json.dump(sample_data, f)
+
+    def tearDown(self):
+        # Delete the test JSON file after the test
+        import os
+        os.remove('test_file.json')
+
+    def test_reload(self):
+        # Instantiate a FileStorage object and call reload
+        fs = FileStorage()
+        fs.reload()
+
+        # Check if __objects attribute contains the expected data
+        expected_data = {
+            'BaseModel.1': {'attr1': 'value1'},
+            'User.2': {'attr2': 'value2'}
+        }
+        self.assertEqual(fs._FileStorage__objects, expected_data)
