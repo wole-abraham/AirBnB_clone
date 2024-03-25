@@ -21,6 +21,8 @@ class TestCityModel(unittest.TestCase):
 
     def test_model_attr(self):
 
+        """ test model attributes """
+
         model = City()
         base_model = BaseModel()
         self.assertTrue(hasattr(User, 'id'))
@@ -28,3 +30,12 @@ class TestCityModel(unittest.TestCase):
         self.assertTrue(hasattr(User, 'updated_at'))
         self.assertTrue(issubclass(User, BaseModel))
         self.assertTrue(hasattr(User, 'state_id'))
+
+    def test_city_attributes(self):
+
+        """ city attributs check xist"""
+
+        self.assertEqual(City.id, "")
+        self.assertEqual(City.name, "")
+        self.assertTrue(hasattr(City, 'name'))
+        self.assertTrue(hasattr(City, 'state_id'))

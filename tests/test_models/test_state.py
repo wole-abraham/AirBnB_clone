@@ -29,3 +29,11 @@ class Test_State_Model(unittest.TestCase):
         self.assertTrue(hasattr(model, 'created_at'))
         self.assertTrue(hasattr(model, 'updated_at'))
         self.assertTrue(issubclass(model, b_model))
+
+    def test_attributes(self):
+
+        """ check state attributes """
+
+        self.assertEqual(State.id, "")
+        self.isinstance(State.id, str)
+        self.issubclass(State, BaseModel)
