@@ -41,3 +41,14 @@ class TestFileStorage(unittest.TestCase):
         storage_all = self.fs.all()
         self.assertTrue(base_model_key in self.fs.all())
         self.fs.reload()
+    
+    def test_file_storage_save(self):
+
+        """ test save """
+
+        fs = FileStorage()
+        bm = BaseModel()
+
+        fs.new(bm)
+        bm.save()
+        self.assertTrue(bm.updated_at == datetime.now())
