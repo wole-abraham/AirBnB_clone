@@ -28,6 +28,7 @@ class TestFileStorage(unittest.TestCase):
 
         fs = self.fs.all()
         self.assertIsInstance(fs, dict)
+        self.assertTrue(FileStorage.__file_path != "")
 
     def test_file_storgage_new(self):
 
