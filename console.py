@@ -249,6 +249,12 @@ class HBNBCommand(cmd.Cmd):
             line = cl_n + ' ' + cl_id
             self.do_show(line)
 
+        elif args[1].startswith('destroy(') and args[1].endswith(')'):
+            cl_n = args[0]
+            cl_id = args[1][8:-1]
+            line = cl_n + ' ' + cl_id
+            self.do_destroy(line)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
