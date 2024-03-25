@@ -27,8 +27,7 @@ class TestPlaceModel(unittest.TestCase):
         self.assertEqual(Place.price_by_night, 0)
         self.assertEqual(Place.latitude, 0.0)
         self.assertEqual(Place.longitude, 0.0)
-        self.assertEqual(Place.longitude, 0.0)
-        self.assertEqual(Place.amenity_ids, 0.0)
+        self.assertEqual(Place.amenity_ids, [])
 
     def test_instance(self):
 
