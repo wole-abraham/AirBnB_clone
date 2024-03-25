@@ -52,3 +52,11 @@ class TestFileStorage(unittest.TestCase):
         bm.save()
         fs.reload()
         self.assertTrue(isinstance(fs.all()[f'BaseModel.{bm.id}'], BaseModel))
+
+    def test_save(self):
+
+        """ test if time is updated """
+        
+        bm = BaseModel()
+        bm.save()
+        self.assertTrue(bm.created_at != bm.updated_at)
