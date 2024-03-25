@@ -255,6 +255,13 @@ class HBNBCommand(cmd.Cmd):
             line = cl_n + ' ' + cl_id
             self.do_destroy(line)
 
+        elif args[1].startswith('update(') and args[1].endswith(')'):
+            cl_n = args[0]
+            cl_id = args[1][7:-1]
+            id_at = cl_id.split(",")
+            line = cl_n + ' ' + id_at[0] + ' ' + id_at[1] + ' ' + id_at[2]
+            self.do_update(line)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
