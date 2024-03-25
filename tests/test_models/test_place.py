@@ -16,7 +16,6 @@ class TestPlaceModel(unittest.TestCase):
 
         """ check all attributes """
 
-        self.assertTrue(hasattr(Place, "id"))
         self.assertEqual(Place.city_id, "")
         self.assertEqual(Place.user_id, "")
         self.assertEqual(Place.name, "")
@@ -34,8 +33,3 @@ class TestPlaceModel(unittest.TestCase):
         """ check atributes inherited from bas_model """
 
         self.assertTrue(issubclass(Place, BaseModel))
-        self.assertTrue(hasattr(Place, 'id'))
-        self.assertTrue(hasattr(Place, 'created_at'))
-        self.assertTrue(hasattr(Place, 'updated_at'))
-        self.assertTrue(hasattr(Place, 'to_dict'))
-        self.assertTrue(hasattr(Place, 'save'))

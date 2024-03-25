@@ -9,7 +9,7 @@ class Place(BaseModel):
 
     """ model place """
 
-    city_id = " "
+    city_id = ""
     user_id = ""
     name = ''
     description = ""
@@ -19,4 +19,4 @@ class Place(BaseModel):
     price_by_night = 0
     latitude = 0.0
     longitude = 0.0
-    amenity_id = []
+    amenity_ids = []

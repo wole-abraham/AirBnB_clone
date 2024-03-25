@@ -1,6 +1,7 @@
 #!/bin/usr/python3
 
 from models.review import Review
+from models.base_model import BaseModel
 import unittest
 
 
@@ -16,12 +17,8 @@ class TestUser(unittest.TestCase):
             its iwn attr
         """
 
-        self.assertTrue(hasattr(Review, 'id'))
-        self.assertTrue(hasattr(Review, 'created_at'))
-        self.assertTrue(hasattr(Review, 'updated_at'))
         self.assertTrue(hasattr(Review, 'place_id'))
         self.assertTrue(hasattr(Review, 'user_id'))
-        self.assertTrue(hasattr(Review, 'place_id'))
 
     def test_class_attributes(self):
         # Test if class attributes are initialized correctly

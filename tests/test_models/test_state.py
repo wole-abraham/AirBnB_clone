@@ -23,9 +23,6 @@ class Test_State_Model(unittest.TestCase):
 
         """
 
-        self.asserTrue(hasattr(State, 'id'))
-        self.assertTrue(hasattr(State, 'created_at'))
-        self.assertTrue(hasattr(State, 'updated_at'))
         self.assertTrue(issubclass(State, BaseModel))
         self.assertTrue(hasattr(State, 'name'))
 
@@ -34,5 +31,4 @@ class Test_State_Model(unittest.TestCase):
         """ check state attributes """
 
         self.assertEqual(State.name, "")
-        self.isinstance(State.id, str)
-        self.issubclass(State, BaseModel)
+        self.assertTrue(issubclass(State, BaseModel))

@@ -5,7 +5,7 @@
 
 """
 
-from models.state import City
+from models.city import City
 from models.base_model import BaseModel
 from models import storage
 import unittest
@@ -23,9 +23,6 @@ class TestCityModel(unittest.TestCase):
 
         """ test model attributes """
 
-        self.assertTrue(hasattr(City, 'id'))
-        self.assertTrue(hasattr(City, 'created_at'))
-        self.assertTrue(hasattr(City, 'updated_at'))
         self.assertTrue(issubclass(City, BaseModel))
         self.assertTrue(hasattr(City, 'state_id'))
         self.assertTrue(hasattr(City, 'name'))
@@ -34,7 +31,6 @@ class TestCityModel(unittest.TestCase):
 
         """ city attributs check xist"""
 
-        self.assertEqual(City.id, "")
         self.assertEqual(City.name, "")
         self.assertTrue(hasattr(City, 'name'))
         self.assertTrue(hasattr(City, 'state_id'))

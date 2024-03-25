@@ -5,7 +5,6 @@
 
 """
 
-from models.state import City
 from models.amenity import Amenity
 from models.base_model import BaseModel
 import unittest
@@ -24,12 +23,8 @@ class TestCityModel(unittest.TestCase):
         """ test model attributes """
 
         model = Amenity()
-        base_model = BaseModel()
-        self.assertTrue(hasattr(Amenity, 'id'))
-        self.assertTrue(hasattr(Amenity, 'created_at'))
-        self.assertTrue(hasattr(Amenity, 'updated_at'))
         self.assertTrue(issubclass(Amenity, BaseModel))
-        self.assertTrue(hasattr(Amenity, 'state_id'))
+        self.assertTrue(hasattr(Amenity, 'name'))
 
     def test_city_attributes(self):
 

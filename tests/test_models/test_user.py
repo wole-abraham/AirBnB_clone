@@ -2,7 +2,7 @@
 
 from models.user import User
 import unittest
-
+from models.base_model import BaseModel
 
 class TestUser(unittest.TestCase):
 
