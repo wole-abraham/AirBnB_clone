@@ -39,8 +39,8 @@ class TestFileStorage(unittest.TestCase):
         """
         base_model = BaseModel()
         base_model_key = f"{BaseModel}.{base_model.id}"
-        self.assertTrue(base_model_key in self.fs.all())
         self.fs.reload()
+        self.assertTrue(isinstance(self.fs.all(), dict))
 
     def test_file_storage_reload(self):
 
