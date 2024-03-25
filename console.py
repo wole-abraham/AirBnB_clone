@@ -218,6 +218,12 @@ class HBNBCommand(cmd.Cmd):
                 setattr(update, var, data)
                 update.save()
 
+    def default(self, line):
+
+        """ deafault for all """
+
+        if line.split(".")[1] == "all()":
+            self.do_all(line.split(".")[0])
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
