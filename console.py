@@ -225,6 +225,7 @@ class HBNBCommand(cmd.Cmd):
         models_name = ['BaseModel', 'User', 'State',
                        'City', 'Amenity', 'Place',
                        'Review']
+        args = line.split(".")
 
         if line.split(".")[1] == "all()":
             self.do_all(line.split(".")[0])
@@ -241,6 +242,13 @@ class HBNBCommand(cmd.Cmd):
                     if keys.split(".")[0] == line.split(".")[0]:
                         count += 1
                 print(count)
+
+        elif args[1].startswith('show(') and args[1].endswith(')'):
+            cl_n = args[0]
+            cl_id = args[1][5:-1]
+            line = cl_n + ' ' + cl_id
+            self.do_show(line)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
