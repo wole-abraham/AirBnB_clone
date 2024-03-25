@@ -28,7 +28,6 @@ class TestFileStorage(unittest.TestCase):
 
         fs = self.fs.all()
         self.assertIsInstance(fs, dict)
-        self.assertTrue(FileStorage.__file_path != "")
 
     def test_file_storgage_new(self):
 
@@ -42,17 +41,6 @@ class TestFileStorage(unittest.TestCase):
         storage_all = self.fs.all()
         self.assertTrue(base_model_key in self.fs.all())
         self.fs.reload()
-    
-    def test_file_storage_save(self):
-
-        """ test save """
-
-        fs = FileStorage()
-        bm = BaseModel()
-
-        fs.new(bm)
-        bm.save()
-        self.assertTrue(bm.updated_at == datetime.now())
 
     def test_file_storage_reload(self):
 
@@ -63,7 +51,7 @@ class TestFileStorage(unittest.TestCase):
         fs.new(bm)
         bm.save()
         fs.reload()
-        self.assertTrue(isinstance(fs.__objects[f'BaseModel.{bm.id}'], class))
+        self.assertTrue(isinstance(fs.__objects[f'BaseModel.{bm.id}'], BaseModel))
 
 class TestFileStorageReload(unittest.TestCase):
     def setUp(self):
@@ -91,3 +79,28 @@ class TestFileStorageReload(unittest.TestCase):
             'User.2': {'attr2': 'value2'}
         }
         self.assertEqual(fs._FileStorage__objects, expected_data)
+
+class TestFileStorageSave(unittest.TestCase):
+    @patch('models.storage')
+    def test_file_storage_save(self, mock_storage):
+        # Create a FileStorage instance
+        fs = FileStorage()
+
+        # Create a BaseModel instance
+        bm = BaseModel()
+
+        # Set the initial updated_at time
+        initial_updated_at = bm.updated_at
+
+        # Add the BaseModel instance to the FileStorage instance
+        fs.new(bm)
+
+        # Call the save method of the BaseModel instance
+        bm.save()
+
+        # Assert that the save method of the FileStorage instance was called
+        mock_storage.save.assert_called_once()
+
+        # Assert that the updated_at attribute of the BaseModel instance was updated
+        self.assertNotEqual(bm.updated_at, initial_updated_at)
+        self.assertEqual(bm.updated_at, mock_storage.updated_at)

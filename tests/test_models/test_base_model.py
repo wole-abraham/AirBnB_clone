@@ -22,7 +22,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(BaseModel(), 'updated_at'))
         self.assertTrue(hasattr(BaseModel, 'save'))
         self.assertTrue(hasattr(BaseModel, 'to_dict'))
-        self.asserrTrue(hasattr(BaseModel, '__str__'))
+        self.assertTrue(hasattr(BaseModel, '__str__'))
 
     def test_id(self):
 
