@@ -22,18 +22,17 @@ class Test_State_Model(unittest.TestCase):
         initialize without kwarsgs
 
         """
-        model = User()
-        b_model = BaseModel()
-        self.assertTrue(hasattr(model, 'name'))
-        self.asserTrue(hasattr(model, 'id'))
-        self.assertTrue(hasattr(model, 'created_at'))
-        self.assertTrue(hasattr(model, 'updated_at'))
-        self.assertTrue(issubclass(model, b_model))
+
+        self.asserTrue(hasattr(State, 'id'))
+        self.assertTrue(hasattr(State, 'created_at'))
+        self.assertTrue(hasattr(State, 'updated_at'))
+        self.assertTrue(issubclass(State, BaseModel))
+        self.assertTrue(hasattr(State, 'name'))
 
     def test_attributes(self):
 
         """ check state attributes """
 
-        self.assertEqual(State.id, "")
+        self.assertEqual(State.name, "")
         self.isinstance(State.id, str)
         self.issubclass(State, BaseModel)
