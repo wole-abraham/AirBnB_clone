@@ -222,8 +222,25 @@ class HBNBCommand(cmd.Cmd):
 
         """ deafault for all """
 
+        models_name = ['BaseModel', 'User', 'State',
+                       'City', 'Amenity', 'Place',
+                       'Review']
+
         if line.split(".")[1] == "all()":
             self.do_all(line.split(".")[0])
+
+        elif line.split(".")[1] == "count()":
+            if line.split(".")[0] not in models_name:
+                print("** class doesn't exist **")
+
+            else:
+                st = storage.all()
+                count = 0
+
+                for keys in st:
+                    if keys.split(".")[0] == line.split(".")[0]:
+                        count += 1
+                print(count)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
