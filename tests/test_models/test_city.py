@@ -23,13 +23,12 @@ class TestCityModel(unittest.TestCase):
 
         """ test model attributes """
 
-        model = City()
-        base_model = BaseModel()
-        self.assertTrue(hasattr(User, 'id'))
-        self.assertTrue(hasattr(User, 'created_at'))
-        self.assertTrue(hasattr(User, 'updated_at'))
-        self.assertTrue(issubclass(User, BaseModel))
-        self.assertTrue(hasattr(User, 'state_id'))
+        self.assertTrue(hasattr(City, 'id'))
+        self.assertTrue(hasattr(City, 'created_at'))
+        self.assertTrue(hasattr(City, 'updated_at'))
+        self.assertTrue(issubclass(City, BaseModel))
+        self.assertTrue(hasattr(City, 'state_id'))
+        self.assertTrue(hasattr(City, 'name'))
 
     def test_city_attributes(self):
 
