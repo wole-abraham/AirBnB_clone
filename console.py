@@ -225,7 +225,7 @@ class HBNBCommand(cmd.Cmd):
         models_name = ['BaseModel', 'User', 'State',
                        'City', 'Amenity', 'Place',
                        'Review']
-        args = line.split(".")
+        args = line.split(".") 
 
         if line.split(".")[1] == "all()":
             self.do_all(line.split(".")[0])
@@ -275,8 +275,6 @@ class HBNBCommand(cmd.Cmd):
                         st.save()
             else:
                 self.do_update(line)
-        else:
-            pass
              
 
 
