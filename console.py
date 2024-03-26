@@ -260,7 +260,24 @@ class HBNBCommand(cmd.Cmd):
             cl_id = args[1][7:-1]
             id_at = cl_id.split(",")
             line = cl_n + ' ' + id_at[0] + ' ' + id_at[1] + ' ' + id_at[2]
-            self.do_update(line)
+            line2 = cl_id.split(",", 1)
+            line2_id = line2[0].split(".")
+            idd = line2_id[0]
+            if line2[1].strip().startswith('{') and line2[1].strip().endswith('}'):
+                line2 = eval(line2[1])
+                key = f'{args[0]}.{idd}'
+                if cl_n not in models_name:
+                    print("** class doesn't exist **")   
+                elif self.check_id(key):
+                    st = storage.all()[key]
+                    for k, v in line2.items():
+                        setattr(st, k, v)
+                        st.save()
+            else:
+                self.do_update(line)
+        else:
+            pass
+             
 
 
 if __name__ == '__main__':

@@ -1,1 +1,1 @@
-{"BaseModel.52aacb02-b3d0-4b22-b88b-f2cb831d189f": {"id": "52aacb02-b3d0-4b22-b88b-f2cb831d189f", "created_at": "2024-03-25T19:37:43.129750", "updated_at": "2024-03-25T19:38:28.113176", "name": "jake", "__class__": "BaseModel"}}
+{"User.69f74af9-a599-47f5-b10e-aec30a616ed8": {"id": "69f74af9-a599-47f5-b10e-aec30a616ed8", "created_at": "2024-03-26T12:06:17.896977", "updated_at": "2024-03-26T12:12:46.224860", "first_name": "John", "first_last": "jake", "age": 79, "__class__": "User"}}
