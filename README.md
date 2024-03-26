@@ -5,12 +5,13 @@ The AirBnB Clone Console is a command-line interface (CLI) tool for managing ins
 ## Installation
 
 1. Clone the repository:
+- `git clone https://github.com/wole-abraham/AirBnB_clone/`
 
 
-2. Navigate to the directory containing the console:
+3. Navigate to the directory containing the console:
 
 
-3. Run the console: ./console.py
+4. Run the console: ./console.py
 
 
 ## Usage
