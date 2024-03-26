@@ -1,4 +1,6 @@
-# AirBnB Clone Console
+# AirBnB Clone 
+
+# Using The Console
 
 The AirBnB Clone Console is a command-line interface (CLI) tool for managing instances of various classes in the AirBnB clone project. It provides commands for creating, displaying, updating, and deleting instances of different models such as `BaseModel`, `User`, `State`, `City`, `Amenity`, `Place`, and `Review`.
 
