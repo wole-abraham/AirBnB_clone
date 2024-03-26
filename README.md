@@ -8,10 +8,10 @@ The AirBnB Clone Console is a command-line interface (CLI) tool for managing ins
 - `git clone https://github.com/wole-abraham/AirBnB_clone/`
 
 
-3. Navigate to the directory containing the console:
+2. Navigate to the directory containing the console:
+- `cd AirBnB_clone` 
 
-
-4. Run the console: ./console.py
+3. Run the console: `./console.py`
 
 
 ## Usage
@@ -34,5 +34,7 @@ Once the console is running, you can use the following commands:
 ### Examples
 
 - To create a new `BaseModel` instance:
+  `create BaseModel`
 
 - To show the details of a `BaseModel` instance with ID `1234`:
+  `show BaseModel 1234`
