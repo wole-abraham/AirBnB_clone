@@ -35,8 +35,12 @@ Once the console is running, you can use the following commands:
 
 ### Examples
 
-- To create a new `BaseModel` instance:
-  `create BaseModel`
+- To create a new `User` instance:
+  `create User`
 
-- To show the details of a `BaseModel` instance with ID `1234`:
-  `show BaseModel 1234`
+- To show the details of a `User` instance with ID `1234`:
+  - `show User 1234`
+  
+- To delete a `User` instance with the ID `1234`:
+  - `destroy User 1234`
+  
